@@ -1,20 +1,18 @@
 package com.netty.client.handler;
 
-import java.util.concurrent.TimeUnit;
-
-import org.apache.log4j.Logger;
-
-import com.netty.common.protobuf.Message;
 import com.netty.client.NettyClient;
 import com.netty.common.protobuf.Command.CommandType;
+import com.netty.common.protobuf.Message;
 import com.netty.common.protobuf.Message.MessageBase;
-
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.EventLoop;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
+import org.apache.log4j.Logger;
+
+import java.util.concurrent.TimeUnit;
 
 public class IdleClientHandler extends SimpleChannelInboundHandler<Message> {
 	public Logger log = Logger.getLogger(this.getClass());	
@@ -54,7 +52,7 @@ public class IdleClientHandler extends SimpleChannelInboundHandler<Message> {
 	 * @param context
 	 */
 	protected void sendPingMsg(ChannelHandlerContext context) {
-		context.writeAndFlush(
+		context.channel().writeAndFlush(
 				MessageBase.newBuilder()
 				.setClientId(CLIENTID)
 				.setCmd(CommandType.PING)

@@ -25,7 +25,7 @@ public class IdleServerHandler extends ChannelInboundHandlerAdapter {
 			} else if (event.state() == IdleState.ALL_IDLE) {
 				type = "all idle";
 			}
-			log.debug(ctx.channel().remoteAddress()+"超时类型：" + type);
+			log.info(ctx.channel().remoteAddress()+"超时类型：" + type);
 		} else {
 			super.userEventTriggered(ctx, evt);
 		}
